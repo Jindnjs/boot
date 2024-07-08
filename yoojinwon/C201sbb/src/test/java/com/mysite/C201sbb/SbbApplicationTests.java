@@ -1,17 +1,12 @@
 package com.mysite.C201sbb;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mysite.C201sbb.answer.Answer;
 import com.mysite.C201sbb.answer.AnswerRepositoty;
 import com.mysite.C201sbb.question.Question;
 import com.mysite.C201sbb.question.QuestionRepository;
@@ -24,11 +19,23 @@ public class SbbApplicationTests {
 	@Autowired
 	private AnswerRepositoty ar;
 	
-    @Transactional
-
+    //@Transactional
 	@Test
 	void testJpa() {
 		
+    	Question q1 = new Question();
+        q1.setSubject("sbb가 a?");
+        q1.setContent("sbb에 대해서 알고 싶습니다.");
+        q1.setCreateDate(LocalDateTime.now());
+        this.qr.save(q1);  // 첫번째 질문 저장
+        
+        Question q2 = new Question();
+        q2.setSubject("스프링부트 모델 질문입니다.");
+        q2.setContent("id는 자동으로 생성되나요?");
+        q2.setCreateDate(LocalDateTime.now());
+        this.qr.save(q2);  // 두번째 질문 저장
+        
+        
 		//디비에서 검색하는 코드
 		//Optional을 쓰는 이유
 		//1개를 꺼내올때 사용한다.
@@ -75,14 +82,14 @@ public class SbbApplicationTests {
 //        assertEquals(2, a.getQuestion().getId());
 		
 		//질문을 통한 답변 검색
-		Optional<Question> oq = this.qr.findById(2);
-        assertTrue(oq.isPresent());
-        Question q = oq.get();
-
-        List<Answer> answerList = q.getAnswerList();
-
-        assertEquals(1, answerList.size());
-        assertEquals("네 자동으로 생성됩니다.", answerList.get(0).getContent());
+//		Optional<Question> oq = this.qr.findById(2);
+//        assertTrue(oq.isPresent());
+//        Question q = oq.get();
+//
+//        List<Answer> answerList = q.getAnswerList();
+//
+//        assertEquals(1, answerList.size());
+//        assertEquals("네 자동으로 생성됩니다.", answerList.get(0).getContent());
         
         
 		

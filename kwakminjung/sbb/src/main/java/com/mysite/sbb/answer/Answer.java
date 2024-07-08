@@ -1,6 +1,8 @@
-package com.mysite.sbb;
+package com.mysite.sbb.answer;
 
 import java.time.LocalDateTime;
+
+import com.mysite.sbb.question.Question;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,9 +15,8 @@ import lombok.Data;
 @Data
 @Entity
 public class Answer {
-
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(columnDefinition="TEXT")
@@ -23,7 +24,7 @@ public class Answer {
 	
 	private LocalDateTime createDate;
 	
+	// 앞(Many)가 나(Answer), 뒤(One)가 Question
 	@ManyToOne
-	private Question question;
-	
+	private Question question; // 중요! 답변의 원본 질문 게시물
 }
