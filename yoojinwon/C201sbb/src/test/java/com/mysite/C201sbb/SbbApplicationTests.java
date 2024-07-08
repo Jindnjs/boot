@@ -1,6 +1,9 @@
 package com.mysite.C201sbb;
 
-import java.time.LocalDateTime;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,22 +18,33 @@ public class SbbApplicationTests {
 	@Test
 	void testJpa() {
 		
-		//q1 객체 생성 및 설정
-		Question q1 = new Question();
-		q1.setSubject("sbb가 무엇인가요?");
-		q1.setContent("sbb에대해 알고싶습니");
-		q1.setCreateDate(LocalDateTime.now());
+		//디비에서 검색하는 코드
+		//Optional을 쓰는 이유
+		//1개를 꺼내올때 사용한다.
+		//만약 꺼내오는 값이 없어서 null이 리턴된다면 (this.qr.findById(1);에서),
+		//오류가 발생하기 때문에 optional객체로 우선 받아온다.
 		
-		//q1을 db에 저장
-		this.qr.save(q1);
+//		Optional<Question> oq = this.qr.findById(1);
+//		if(oq.isPresent()) {
+//			Question q = oq.get();
+//			assertEquals("sbb가 무엇인가요?", q.getSubject());
+//		}
 		
-		//q2 객체 생성 및 설정
-		Question q2 = new Question();
-        q2.setSubject("스프링부트 모델 질문입니다.");
-        q2.setContent("id는 자동으로 생성되나요?");
-        q2.setCreateDate(LocalDateTime.now());
+		//제목으로 검색하는 코드
+//		Question q2 = this.qr.findBySubject("sbb가 무엇인가요?");
+//		assertEquals(1, q2.getId());
 		
-        //q2을 db에 저장
-      	this.qr.save(q2);
+		//삭제하는 코드
+		//삭제전 총 갯수 확인
+		assertEquals(2,this.qr.count());
+		//get single Question where id = 1
+		Optional<Question> oq = this.qr.findById(1);
+		//check oq is valid
+		assertTrue(oq.isPresent());
+		//delete q where id = 1
+		Question q = oq.get();
+		this.qr.delete(q);
+		assertEquals(1, this.qr.count());
+		
 	}
 }
