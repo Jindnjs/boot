@@ -1,4 +1,4 @@
-package com.example.sbb;
+package com.example.sbb.question;
 
 import java.util.List;
 
