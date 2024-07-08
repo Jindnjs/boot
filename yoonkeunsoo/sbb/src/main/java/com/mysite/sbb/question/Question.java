@@ -1,7 +1,9 @@
-package com.mysite.sbb;
+package com.mysite.sbb.question;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import com.mysite.sbb.answer.Answer;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -12,8 +14,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 
-@Data
 @Entity
+@Data
 public class Question {
 	
     @Id
@@ -28,6 +30,7 @@ public class Question {
 
     private LocalDateTime createDate;
     
-    @OneToMany(mappedBy="question", cascade=CascadeType.REMOVE)
-    private List<Answer> answerList;
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE) 
+    private List<Answer> answerList; 
+    
 }
