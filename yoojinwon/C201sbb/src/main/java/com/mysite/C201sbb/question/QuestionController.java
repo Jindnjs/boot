@@ -45,7 +45,7 @@ public class QuestionController {
     	
     	return "redirect:/question/list";
     }
-    @GetMapping("/delete")
+    @GetMapping("/delete/{id}")
     public String deleteQuestion(@PathVariable("id") Integer id) {
     	qs.delete(id);
     	return "redirect:/question/list";
