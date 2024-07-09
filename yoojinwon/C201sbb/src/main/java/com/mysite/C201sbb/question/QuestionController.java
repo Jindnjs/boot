@@ -6,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,6 +34,22 @@ public class QuestionController {
     	return "question_detail";
     }
 //	
+    @GetMapping("/create")
+    public String create() {
+    	return "question_create";
+    }
+    
+    @PostMapping("/create")
+    public String questionCreate(@RequestParam(value="subject") String subject, @RequestParam(value="content") String content) {
+    	this.qs.create(subject, content);
+    	
+    	return "redirect:/question/list";
+    }
+    @GetMapping("/delete")
+    public String deleteQuestion(@PathVariable("id") Integer id) {
+    	qs.delete(id);
+    	return "redirect:/question/list";
+    }
 //	@GetMapping("/question/list")
 //    public String list() {
 //        return "question_list";
