@@ -10,9 +10,4 @@ public class MainController {
 	public String index() {
 		return "index";
 	}
-	
-	@GetMapping("/readlist")
-	public String readlist() {
-		return "readlist";
-	}
 }
