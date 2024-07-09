@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="/board/update" method="post">
+
+		<!-- 새로운 글 등록이 아닌 기존 글 수정을 위해 기존 id를 가져온다. 정식 방법은 따로 있음 -->
+		<input type="hidden" name="id" th:value="${board.id}">
+
+
+		<!-- 이부분은 date를 기존값으로 사용하는 방법, 작성하지 않으면 수정한 시점으로 변경 -->
+		<input type="hidden" name="date" th:value="${board.date}">
+
+
+		<p>
+			제목: <input type="text" name="title" th:value="${board.title}">
+		<p>
+			내용: <input type="text" name="content" th:value="${board.content}">
+		<p>
+			<input type="submit" value="등록">
+	</form>
+
+	<!-- 이대로 진행하면 새로운 글 등록으로 작동함
+	<form action="/board/update" method="post">
+		<p>
+			제목: <input type="text" name="title" th:value="${board.title}">
+		<p>
+			내용: <input type="text" name="content" th:value="${board.content}">
+		<p>
+			<input type="submit" value="등록">
+	</form>
+	 -->
+</body>
+</html>

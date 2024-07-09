@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:each="notice : ${notices}"> <!-- 여러개중 하나 라는 의미로 s를 붙여준다 -->
+		<!--  태그 내에 작성하지 않고 작성하기 위해 [[ 여기에 ]] 작성한다 -->
+		[[${notice.id}]] / [[${notice.title}]] / [[${notice.date}]]
+		<br>
+	</div>
+</body>
+</html>
